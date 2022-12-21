@@ -1,0 +1,22 @@
+version: '3.8'
+
+networks:
+  app-network:
+    driver: bridge
+
+services:
+  app:
+    restart: on-failure
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - type: bind
+        source: .
+        target: /home/app/
+      - /home/app/node_modules
+    networks:
+      - app-network
+    command: sh -c 'npm i && npm start'
