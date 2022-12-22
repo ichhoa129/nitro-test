@@ -1,6 +1,10 @@
 FROM node:16
-WORKDIR /usr/src/app
-COPY package*.json ./
+
+WORKDIR /app
+
 COPY . .
 EXPOSE 3000
-CMD [ "node", "bin/www" ]
+
+RUN chmod +x /app/script.sh
+
+CMD [ "/app/script.sh" ]
